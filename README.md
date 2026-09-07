@@ -1,41 +1,103 @@
-# voyra-schedule · 日程中心
+<div align="center">
 
-> Voyra 个人网站（https://lxlrwxs.top）的「日程中心」模块源码。
-> 本仓库为唯一源码来源，push 后通过 GitHub Actions 自动同步至 Voyra 主仓库并触发部署。
+# 🗓 Voyra · 日程中心 · Schedule Center
 
-## 功能
+**一个页面搞定大学课程表与日程规划 ｜ Course schedule, weekly planner and calendar in one place**
 
-- **课程表（ClassSchedule）**：大学课表，以「两节连堂」为节次单位（1-2 / 3-4 / 5-6 / 7-8 / 晚自习1 / 晚自习2）；周次自动定位；老师职称完整显示（如「龙承星副教授」）；教室识别；课程明细默认折叠
-- **Excel / xls 导入**：支持教务系统网格课表（表头首列空、第 X 大节(01,02)、格内周次混写 `2-17([周])[01-02节]`、逗号隔周 `3,5,7,9([周])`、单周/双周自动识别）
-- **文本识别导入**：粘贴文本自动识别课程
-- **时间自定义**：每节课时间、晚自习时间可调；iOS 风格滚轮时间选择器
-- **日历日程（Planner）**：月历视图 + 2026 法定节假日/调休植入；自定义日程（开学/放假/考试/活动）；本地存储
-- **今日概览**：日期 / 今日课程 / 今日日程自动汇总
+[![Sync to Voyra](https://github.com/liixnglinb/voyra-schedule/actions/workflows/sync-to-voyra.yml/badge.svg)](https://github.com/liixnglinb/voyra-schedule/actions/workflows/sync-to-voyra.yml)
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38BDF8?logo=tailwindcss&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-A48830)
 
-## 技术栈
+### [🌐 在线演示 Live Demo](https://lxlrwxs.top/#/timetable) ｜ [🏠 Voyra 主站 Main Site](https://lxlrwxs.top) ｜ [📦 主仓库 Main Repo](https://github.com/liixnglinb/Voyra)
 
-- React 18 · Vite 5 · HashRouter
-- lucide-react 图标
-- xlsx（Excel 解析）
-- localStorage 本地存储（登录用户按用户隔离）
+</div>
 
-## 目录说明
+---
+
+## ✨ 功能特性 / Features
+
+### 课程表 / Class Schedule
+- **周次自动定位**：根据开学日期自动计算并高亮当前教学周，支持手动切换周次。
+  *Auto-locates the current teaching week from the semester start date, with manual week switching.*
+- **智能连堂合并**：两节连上的课程自动合并为一个色块，网格整洁直观。
+  *Consecutive periods of the same course are merged into one block.*
+- **完整信息展示**：课程名、上课教师（含「副教授/讲师」等完整职称）、上课教室一并显示。
+  *Shows course name, teacher with full academic title, and classroom together.*
+- **课程明细默认折叠**：网格保持清爽，点击课程卡片再展开全部周次与明细。
+  *Details collapse by default; tap a card to expand weeks and full info.*
+- **作息时间自定义**：每节课与晚自习的起止时间均可调节，采用主流滚轮时间选择器。
+  *Fully editable period/evening-study times with a wheel-style time picker.*
+
+### 三种导入方式 / Three Import Modes
+- **教务 XLS 导入**：直接解析教务系统导出的网格课表，自动识别「2-17周 / 单双周 / 连堂 / 教室 / 教师职称」等混写格式（基于 SheetJS）。
+  *Parses registrar-exported XLS grids, including mixed week ranges, odd/even weeks, merged periods and classrooms (SheetJS).*
+- **文字识别导入**：粘贴课程文本即可智能拆分课程、周次、节次与地点。
+  *Paste plain course text and auto-split name / weeks / periods / location.*
+- **手动添加**：表单逐项录入，灵活补建。
+  *Manual entry form for edge cases.*
+
+### 日程规划 / Planner & Calendar
+- 今日概览、待办清单、自定义事项；月历视图并标注法定节假日。
+  *Today overview, to-do list, custom events, month calendar with public holidays.*
+
+## 🛠 技术栈 / Tech Stack
+
+| 类别 Category | 技术 Stack |
+| --- | --- |
+| 框架 Framework | React 18（函数组件 + Hooks） |
+| 构建 Build | Vite 5 |
+| 样式 Styling | Tailwind CSS |
+| 表格解析 XLS | SheetJS（xlsx） |
+| 数据存储 Storage | localStorage（+ Voyra 共享 Bmob 云端层） |
+| 图标 Icons | lucide-react |
+
+## 📁 目录结构 / Structure
 
 ```
-src/pages/
-├── ScheduleHub.jsx     # 日程中心入口：课程表/日历日程模式切换 + 今日概览
-├── ClassSchedule.jsx   # 课程表：节次块 / 周次 / 导入 / 时间设置
-└── Planner.jsx         # 日历日程：月历 / 节假日 / 自定义事项
+src/
+└── pages/
+    ├── ScheduleHub.jsx      # 日程中心入口与聚合 / Hub entry & tabs
+    ├── ClassSchedule.jsx    # 课表网格 + XLS/文本解析器 / Grid + parsers
+    └── Planner.jsx          # 日程规划与日历 / Planner & calendar
 ```
 
-> 依赖主仓库共享模块（`src/lib/auth`、`src/components/AuthGate`、`src/components/DateTimePicker`），需在 Voyra 主仓库环境运行。
+## 🔗 与 Voyra 主仓库的关系 / How It Syncs
 
-## 开发与同步流程
+本仓库是 Voyra 个人工具中心「日程中心」模块的**独立源码仓库**：代码在本仓库维护，每次 `push` 由 GitHub Actions 自动同步到 Voyra 主仓库的相同路径，主仓库统一构建并部署到 Cloudflare Pages，域名、路由与数据均无需改动。
 
-1. 修改 `src/pages/` 下文件（建议在 Voyra 主仓库本地副本中开发调试，依赖完整）
-2. 将改动复制回本仓库对应文件
-3. `git push` → GitHub Actions 自动同步到 [Voyra](https://github.com/liixnglinb/Voyra) 主仓库 → Cloudflare Pages 自动部署
+*This is the standalone source repo of the Schedule Center module. Every push is auto-synced into the main Voyra repository at the same paths; the main repo builds and deploys the whole site to Cloudflare Pages.*
 
-## 搜索关键词
+```mermaid
+flowchart LR
+  A["本仓库<br/>voyra-schedule"] -->|git push| B["GitHub Actions<br/>Sync to Voyra"]
+  B -->|同步相同路径文件| C["Voyra 主仓库<br/>liixnglinb/Voyra"]
+  C -->|自动构建 build| D["Cloudflare Pages"]
+  D --> E["lxlrwxs.top/#/timetable"]
+```
 
-课表、日程、大学课表、课程表、日历、教务系统、timetable、schedule、planner、calendar、react
+## 🚀 本地开发 / Development
+
+模块依赖主仓库的共享层（路由、鉴权、Bmob、通用 UI 组件），因此本仓库用于**展示、被 GitHub 搜索与自动同步**；需要完整运行时请克隆主仓库：
+
+*The module depends on the main repo's shared layer (router, auth, Bmob, common UI). Clone the main repo to run it locally:*
+
+```bash
+git clone https://github.com/liixnglinb/Voyra.git
+cd Voyra
+npm install
+npm run dev
+```
+
+修改本模块文件后，在本仓库提交推送即可自动同步上线。
+
+*Edit the module files, commit and push here — the site updates automatically.*
+
+## 📄 许可证 / License
+
+MIT © [liixnglinb](https://github.com/liixnglinb)
+
+## 🔍 关键词 / Keywords
+
+课程表 课表 大学 教务系统 XLS课表导入 单双周 日程 规划 日历 时间表 React ｜ schedule timetable planner calendar university course xlsx-import react vite
