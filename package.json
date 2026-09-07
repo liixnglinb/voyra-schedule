@@ -1,0 +1,20 @@
+{
+  "name": "voyra-schedule",
+  "version": "1.0.0",
+  "description": "日程中心：大学课表 + 日历日程一体化。课表支持教务系统 xls 导入、老师职称、教室识别、时间自定义；日历含法定节假日与自定义日程。Schedule Hub: university timetable & calendar planner.",
+  "private": true,
+  "keywords": [
+    "课表",
+    "日程",
+    "大学课表",
+    "课程表",
+    "日历",
+    "教务系统",
+    "timetable",
+    "schedule",
+    "planner",
+    "calendar",
+    "react"
+  ],
+  "license": "MIT"
+}
