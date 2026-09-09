@@ -4,7 +4,7 @@
 
 **一个页面搞定大学课程表与日程规划 ｜ Course schedule, weekly planner and calendar in one place**
 
-[![Sync to Voyra](https://github.com/liixnglinb/voyra-schedule/actions/workflows/sync-to-voyra.yml/badge.svg)](https://github.com/liixnglinb/voyra-schedule/actions/workflows/sync-to-voyra.yml)
+[![Sync to Voyra](https://github.com/liixnglinb/Voyra-schedule/actions/workflows/sync-to-voyra.yml/badge.svg)](https://github.com/liixnglinb/Voyra-schedule/actions/workflows/sync-to-voyra.yml)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38BDF8?logo=tailwindcss&logoColor=white)
@@ -71,7 +71,7 @@ src/
 
 ```mermaid
 flowchart LR
-  A["本仓库<br/>voyra-schedule"] -->|git push| B["GitHub Actions<br/>Sync to Voyra"]
+  A["本仓库<br/>Voyra-schedule"] -->|git push| B["GitHub Actions<br/>Sync to Voyra"]
   B -->|同步相同路径文件| C["Voyra 主仓库<br/>liixnglinb/Voyra"]
   C -->|自动构建 build| D["Cloudflare Pages"]
   D --> E["lxlrwxs.top/#/timetable"]
